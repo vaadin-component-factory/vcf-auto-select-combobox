@@ -1,7 +1,5 @@
 # &lt;vcf-auto-select-combobox&gt;
 
-**Note that this is a starter boilerplate for creating Polymer 3 based components.**
-
 **Run `npm install` and follow the prompts to setup the workspace.**
 
 <!--
