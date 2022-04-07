@@ -1,19 +1,20 @@
 {
-  "name": "@vaadin-component-factory/vcf-element",
-  "version": "1.0.0",
-  "description": "[element-description]",
-  "main": "src/vcf-element.js",
+  "name": "@vaadin-component-factory/vcf-auto-select-combobox",
+  "version": "14.8.6",
+  "description": "The AutoSelect Combobox component extends from Combobox",
+  "main": "src/vcf-auto-select-combobox.js",
   "author": "Vaadin Ltd",
   "license": "https://raw.githubusercontent.com/vaadin/vaadin-incubator-element/master/LICENSE",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vaadin-component-factory/vcf-element.git"
+    "url": "git+https://github.com/vaadin-component-factory/vcf-auto-select-combobox.git"
   },
   "keywords": [
     "Vaadin",
     "vaadin-incubator-element",
     "vaadin-component-factory",
     "vcf-element",
+    "vcf-auto-select-combobox",
     "web-components",
     "web-component",
     "polymer"
@@ -92,12 +93,12 @@
     "webpack-merge": "^4.2.1"
   },
   "bugs": {
-    "url": "https://github.com/vaadin-component-factory/vcf-element/issues"
+    "url": "https://github.com/vaadin-component-factory/vcf-auto-select-combobox/issues"
   },
   "files": [
     "src"
   ],
-  "homepage": "https://github.com/vaadin-component-factory/vcf-element#readme",
+  "homepage": "https://github.com/vaadin-component-factory/vcf-auto-select-combobox#readme",
   "directories": {
     "test": "test"
   }
