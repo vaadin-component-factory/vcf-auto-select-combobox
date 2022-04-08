@@ -1,6 +1,6 @@
 # &lt;vcf-auto-select-combobox&gt;
 
-<vcf-auto-select-combobx> is a Web Component providing an extra feature for combobox such as having error message while focus lost or matching the value when there is only one value in blur when focus lost or hitting enter.
+&lt;vcf-auto-select-combobox&gt; is a Web Component providing an extra feature for combobox such as having error message while focus lost or matching the value when there is only one value in blur when focus lost or hitting enter.
 
 
 **Run `npm install` and follow the prompts to setup the workspace.**
