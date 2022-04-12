@@ -1,2 +1,2 @@
 /* THIS SCRIPT IS RUN AUTOMATICALLY AFTER NPM INSTALL. */
-initialize(__dirname);
+require('@vaadin-component-factory/vcf-element-util').initialize(__dirname);
