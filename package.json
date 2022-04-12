@@ -27,7 +27,6 @@
     "build": "run-s build:api build:demo",
     "build:api": "npm run prestart && polymer build",
     "build:demo": "webpack --env production",
-    "postinstall": "node util/init.js",
     "publish": "node util/publish.js"
   },
   "husky": {
