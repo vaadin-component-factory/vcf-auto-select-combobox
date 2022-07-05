@@ -1,6 +1,6 @@
-import { ComboBoxElement } from '@vaadin/vaadin-combo-box';
+import { ComboBox } from '@vaadin/combo-box';
 
-class AutoSelectComboBoxElement extends ComboBoxElement {
+class AutoSelectComboBoxElement extends ComboBox {
   constructor() {
     super();
     this.previousInputLabel = '';
@@ -18,7 +18,7 @@ class AutoSelectComboBoxElement extends ComboBoxElement {
   }
 
   _onValueSet(e) {
-    if(e.detail.value) {
+    if (e.detail.value) {
       this.invalid = false;
     }
   }
@@ -47,21 +47,15 @@ class AutoSelectComboBoxElement extends ComboBoxElement {
   }
 
   _filteredItemsChanged(e, itemValuePath, itemLabelPath) {
-    if (e.path === 'filteredItems' || e.path === 'filteredItems.splices') {
-      this._setOverlayItems(this.filteredItems);
+    this._setOverlayItems(this.filteredItems);
 
-      // if filteredItems has a single item then return index 0 else do standard behaviour
-      if (this.filteredItems && this.filteredItems.length === 1) {
-        this._focusedIndex = 0;
-      } else if (this.opened || this.autoOpenDisabled) {
-        this._focusedIndex = this.$.overlay.indexOfLabel(this.filter);
-      } else {
-        this._focusedIndex = this._indexOfValue(this.value, this.filteredItems);
-      }
-
-      if (this.opened) {
-        this._repositionOverlay();
-      }
+    // if filteredItems has a single item then return index 0 else do standard behaviour
+    if (this.filteredItems && this.filteredItems.length === 1) {
+      this._focusedIndex = 0;
+    } else if (this.opened || this.autoOpenDisabled) {
+      this._focusedIndex = this.$.dropdown.indexOfLabel(this.filter);
+    } else {
+      this._focusedIndex = this._indexOfValue(this.value, this.filteredItems);
     }
   }
 
@@ -77,4 +71,3 @@ class AutoSelectComboBoxElement extends ComboBoxElement {
 }
 
 customElements.define(AutoSelectComboBoxElement.is, AutoSelectComboBoxElement);
-
