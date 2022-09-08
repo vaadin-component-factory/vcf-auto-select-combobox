@@ -46,16 +46,14 @@ class AutoSelectComboBoxElement extends ComboBox {
     }
   }
 
-  _filteredItemsChanged(e, itemValuePath, itemLabelPath) {
-    this._setOverlayItems(this.filteredItems);
-
+  _filteredItemsChanged(filteredItems, oldFilteredItems) {
     // if filteredItems has a single item then return index 0 else do standard behaviour
     if (this.filteredItems && this.filteredItems.length === 1) {
       this._focusedIndex = 0;
     } else if (this.opened || this.autoOpenDisabled) {
-      this._focusedIndex = this.$.dropdown.indexOfLabel(this.filter);
+      this._focusedIndex = this.__getItemIndexByLabel(this.filteredItems, this.filter);
     } else {
-      this._focusedIndex = this._indexOfValue(this.value, this.filteredItems);
+      this._focusedIndex = this.__getItemIndexByLabel(this.filteredItems, this.value);
     }
   }
 
