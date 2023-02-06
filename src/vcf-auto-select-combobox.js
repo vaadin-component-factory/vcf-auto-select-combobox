@@ -1,4 +1,5 @@
 import { ComboBox } from '@vaadin/combo-box';
+import { ComboBoxPlaceholder } from '@vaadin/combo-box/src/vaadin-combo-box-placeholder.js';
 
 class AutoSelectComboBoxElement extends ComboBox {
   constructor() {
@@ -65,6 +66,19 @@ class AutoSelectComboBoxElement extends ComboBox {
       this.invalid = !validity;
     }
     return validity;
+  }
+
+  _closeOrCommit() {
+    // Double check that the combobox placeholder is not the focused item
+    let focusedItem = null;
+    if (this._focusedIndex == 0 && this.filteredItems.length == 1) {
+      focusedItem = this.filteredItems[this._focusedIndex];
+    }
+    if (focusedItem != null && typeof focusedItem == 'object' && focusedItem instanceof ComboBoxPlaceholder) {
+      this.close();
+    } else {
+      super._closeOrCommit();
+    }
   }
 }
 
