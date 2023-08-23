@@ -20,7 +20,11 @@ class AutoSelectComboBoxElement extends ComboBox {
 
   _onValueSet(e) {
     if (e.detail.value) {
-      this.invalid = false;
+      if (this.items && this.items.indexOf(e.detail.value) < 0) {
+        this.invalid = true;
+      } else {
+        this.invalid = false;
+      }
     }
   }
 
@@ -28,7 +32,6 @@ class AutoSelectComboBoxElement extends ComboBox {
     if (this.previousInputLabel === e.detail) {
       return;
     }
-
     this.previousInputLabel = e.detail;
 
     if (this._focusedIndex < 0) {

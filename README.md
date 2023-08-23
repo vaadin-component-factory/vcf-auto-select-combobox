@@ -41,7 +41,7 @@ Add `<vcf-auto-select-combobox>` element to the page.
 
 1. When in the `vcf-auto-select-combobox` directory, run `npm install` to install dependencies.
 
-1. Run `npm start` to open the demo.
+1. Run `npm run serve` to open the demo.
 
 <!--
 ## Vaadin Pro
