@@ -51,6 +51,11 @@ class AutoSelectComboBoxElement extends ComboBox {
   }
 
   _filteredItemsChanged(filteredItems, oldFilteredItems) {
+    if (this.filter === '') {
+      // cleared filter
+      this._focusedIndex = -1;
+      return;
+    }
     // if filteredItems has a single item then return index 0 else do standard behaviour
     if (this.filteredItems && this.filteredItems.length === 1) {
       this._focusedIndex = 0;

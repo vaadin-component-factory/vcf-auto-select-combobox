@@ -10,4 +10,6 @@ window.addEventListener('WebComponentsReady', () => {
   combo.items = ['Chrome', 'Edge', 'Firefox', 'Safari'];
   const auto = document.getElementById("auto");
   auto.items = ['Chrome', 'Edge', 'Firefox', 'Safari'];
+  const auto1 = document.getElementById("auto1");
+  auto1.items = ['One'];
 });
