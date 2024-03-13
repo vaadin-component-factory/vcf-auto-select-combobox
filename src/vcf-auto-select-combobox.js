@@ -20,7 +20,7 @@ class AutoSelectComboBoxElement extends ComboBox {
 
   _onValueSet(e) {
     if (e.detail.value) {
-      if (this.items && this.isValidValue(e.detail.value) < 0) {
+      if (this.items && this.__getItemIndexByValue(this.items, e.detail.value) < 0) {
         this.invalid = true;
       } else {
         this.invalid = false;
