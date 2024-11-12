@@ -59,8 +59,13 @@ class AutoSelectComboBoxElement extends ComboBox {
 
   checkValidity() {
     let validity = super.checkValidity();
-    // if filter is not empty and not in items then trigger client-side validation
-    if (validity && this.filteredItems && !this.filteredItems.length) {
+
+    if (!validity && this.inputElement?.value === '' && !this.required) {
+      // if input is empty and element is not required, it's valid
+      validity = true;
+      this.invalid = !validity;
+    } else if (validity && this.filteredItems && !this.filteredItems.length) {
+      // if filter is not empty and not in items then trigger client-side validation
       validity = false;
       this.invalid = !validity;
     }
