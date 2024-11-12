@@ -1,6 +1,6 @@
 {
   "name": "@vaadin-component-factory/vcf-auto-select-combobox",
-  "version": "23.4.2",
+  "version": "23.4.3",
   "description": "The AutoSelect Combobox component extends from Combobox",
   "main": "src/vcf-auto-select-combobox.js",
   "author": "Vaadin Ltd",
