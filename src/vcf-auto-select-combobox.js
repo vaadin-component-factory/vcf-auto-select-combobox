@@ -34,10 +34,6 @@ class AutoSelectComboBoxElement extends ComboBox {
     }
     this.previousInputLabel = e.detail;
 
-    if (this._focusedIndex < 0) {
-      this.selectedItem = { key: null, label: e.detail };
-    }
-
     this.checkValidity();
   }
 
@@ -48,6 +44,7 @@ class AutoSelectComboBoxElement extends ComboBox {
       // keep track of latest input label
       this.previousInputLabel = this._getItemLabel(this.selectedItem);
     }
+    this.checkValidity();
   }
 
   _filteredItemsChanged(filteredItems, oldFilteredItems) {
@@ -63,12 +60,14 @@ class AutoSelectComboBoxElement extends ComboBox {
     if (!validity && this.inputElement?.value === '' && !this.required) {
       // if input is empty and element is not required, it's valid
       validity = true;
-      this.invalid = !validity;
-    } else if (validity && this.filteredItems && !this.filteredItems.length) {
+    } else if (!validity && this.filteredItems.some(item => item.label == this.filter)) {
+      // Invalid value was fixed to a valid one (filter string exists in filteredItems)
+      validity = true;
+    } else if (validity && this.filter !== '' && this.filteredItems && !this.filteredItems.includes(this.filter)) {
       // if filter is not empty and not in items then trigger client-side validation
       validity = false;
-      this.invalid = !validity;
     }
+    this.invalid = !validity;
     return validity;
   }
 
