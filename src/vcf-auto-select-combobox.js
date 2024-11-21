@@ -60,11 +60,20 @@ class AutoSelectComboBoxElement extends ComboBox {
     if (!validity && this.inputElement?.value === '' && !this.required) {
       // if input is empty and element is not required, it's valid
       validity = true;
-    } else if (!validity && this.filteredItems.some(item => item.label == this.filter)) {
-      // Invalid value was fixed to a valid one (filter string exists in filteredItems)
+    } else if (
+      !validity &&
+      this.filteredItems.some(item2 => item2.label == this.filter || item2.label == this.inputElement.value)
+    ) {
+      // Invalid value was fixed to a valid one (filter string/filter input value exists in filteredItems)
       validity = true;
-    } else if (validity && this.filter !== '' && this.filteredItems && !this.filteredItems.includes(this.filter)) {
-      // if filter is not empty and not in items then trigger client-side validation
+    } else if (
+      validity &&
+      this.filter !== '' &&
+      !this.filteredItems.some(item => item.label == this.filter || item.label == this.inputElement.value)
+    ) {
+      // if filter is not empty and not in items then trigger client-side validation OR
+      // filter hasn't had the time to change but the value was chosen from the dropdown
+      // and inputElement has a matching value
       validity = false;
     }
     this.invalid = !validity;
