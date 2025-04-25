@@ -54,6 +54,17 @@ class AutoSelectComboBoxElement extends ComboBox {
     }
   }
 
+  _onClearAction() {
+    if (this.readonly) {
+      return;
+    }
+    this.selectedItem = null;
+    if (this.allowCustomValue) {
+      this.value = '';
+    }
+    this._detectAndDispatchChange();
+  }
+
   checkValidity() {
     let validity = super.checkValidity();
 
