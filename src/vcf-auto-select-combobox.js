@@ -7,6 +7,26 @@ class AutoSelectComboBoxElement extends ComboBox {
     this.previousInputLabel = '';
   }
 
+  static get properties() {
+    return {
+      /**
+       * Used to indicate that the internal validation failed.
+       * @protected
+       */
+      _invalidInternal: {
+        type: Boolean
+      },
+
+      /**
+       * Used to indicate that the external validation failed.
+       */
+      invalidExternal: {
+        type: Boolean,
+        observer: '_invalidExternalChanged'
+      }
+    };
+  }
+
   static get is() {
     return 'vcf-auto-select-combo-box';
   }
@@ -21,10 +41,11 @@ class AutoSelectComboBoxElement extends ComboBox {
   _onValueSet(e) {
     if (e.detail.value) {
       if (this.items && this.__getItemIndexByValue(this.items, e.detail.value) < 0) {
-        this.invalid = true;
+        this._invalidInternal = true;
       } else {
-        this.invalid = false;
+        this._invalidInternal = false;
       }
+      this._updateInvalidState();
     }
   }
 
@@ -52,6 +73,10 @@ class AutoSelectComboBoxElement extends ComboBox {
     if (this.filteredItems && this.filteredItems.length === 1) {
       this._focusedIndex = 0;
     }
+  }
+
+  _invalidExternalChanged() {
+    this._updateInvalidState();
   }
 
   _onClearAction() {
@@ -87,8 +112,13 @@ class AutoSelectComboBoxElement extends ComboBox {
       // and inputElement has a matching value
       validity = false;
     }
-    this.invalid = !validity;
+    this._invalidInternal = !validity;
+    this._updateInvalidState();
     return validity;
+  }
+
+  _updateInvalidState() {
+    this.invalid = this._invalidInternal || this.invalidExternal;
   }
 
   _closeOrCommit() {
