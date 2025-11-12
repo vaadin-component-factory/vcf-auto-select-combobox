@@ -62,7 +62,6 @@ class AutoSelectComboBoxElement extends ComboBox {
       return;
     }
     this.previousInputLabel = e.detail;
-    this.selectedItem = null;
 
     this.checkValidity();
   }
