@@ -53,5 +53,17 @@
           </script>
         </template>
       </demo-snippet>
+      <h2 slot="header">Example 4 - Normal Combobox and Auto select combobox, side-by-side, with required indicator.</h2>
+      <demo-snippet>
+        <template>
+          <vaadin-combo-box id="req1" label="Regular ComboBox" clear-button-visible required></vaadin-combo-box>
+          <vcf-auto-select-combo-box id="req2" label="Auto-select ComboBox" clear-button-visible required></vcf-auto-select-combo-box>
+          <script>
+            window.addEventListener('WebComponentsReady', () => {
+              // Example 1
+            });
+          </script>
+        </template>
+      </demo-snippet>
   </body>
 </html>

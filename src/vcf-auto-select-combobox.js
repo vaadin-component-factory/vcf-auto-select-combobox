@@ -62,6 +62,7 @@ class AutoSelectComboBoxElement extends ComboBox {
       return;
     }
     this.previousInputLabel = e.detail;
+    this.selectedItem = null;
 
     this.checkValidity();
   }
@@ -102,29 +103,26 @@ class AutoSelectComboBoxElement extends ComboBox {
   checkValidity() {
     let validity = super.checkValidity();
     if (!this.dirty && this.inputElement?.value === '' && this.required) {
+      // if there are no changes (not dirty) and input is empty and element is required, it's valid
       validity = true;
     } else if (!validity && this.inputElement?.value === '' && !this.required) {
       // if input is empty and element is not required, it's valid
       validity = true;
-    } else if (
-      !validity &&
-      this.filteredItems.some(item2 => item2.label == this.filter || item2.label == this.inputElement.value)
-    ) {
+    } else if (!validity && this._filteredItemsContainFilterOrInputValue()) {
       // Invalid value was fixed to a valid one (filter string/filter input value exists in filteredItems)
       validity = true;
-    } else if (
-      validity &&
-      this.filter !== '' &&
-      !this.filteredItems.some(item => item.label == this.filter || item.label == this.inputElement.value)
-    ) {
-      // if filter is not empty and not in items then trigger client-side validation OR
-      // filter hasn't had the time to change but the value was chosen from the dropdown
-      // and inputElement has a matching value
+    } else if (validity && !this.selectedItem && !this._filteredItemsContainFilterOrInputValue()) {
+      // if no item is selected and filtered items don't contain filter or input value
+      // then this field is invalid
       validity = false;
     }
     this._invalidInternal = !validity;
     this._updateInvalidState();
     return validity;
+  }
+
+  _filteredItemsContainFilterOrInputValue() {
+    return this.filteredItems.some(item => item.label == this.filter || item.label == this.inputElement.value);
   }
 
   _updateInvalidState() {
