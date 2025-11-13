@@ -29,4 +29,8 @@ window.addEventListener('WebComponentsReady', () => {
   auto1.items = ['One'];
   const month = document.getElementById("month");
   month.items = months;
+  const req1 = document.getElementById("req1");
+  req1.items = ['Chrome', 'Edge', 'Firefox', 'Safari'];
+  const req2 = document.getElementById("req2");
+  req2.items = ['Chrome', 'Edge', 'Firefox', 'Safari'];
 });
