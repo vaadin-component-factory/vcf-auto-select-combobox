@@ -101,22 +101,26 @@ class AutoSelectComboBoxElement extends ComboBox {
 
   checkValidity() {
     let validity = super.checkValidity();
-    if (!this.dirty && this.inputElement?.value === '' && this.required) {
-      // if there are no changes (not dirty) and input is empty and element is required, it's valid
-      validity = true;
-    } else if (!validity && this.inputElement?.value === '' && !this.required) {
-      // if input is empty and element is not required, it's valid
-      validity = true;
-    } else if (!validity && this._filteredItemsContainFilterOrInputValue()) {
-      // Invalid value was fixed to a valid one (filter string/filter input value exists in filteredItems)
-      validity = true;
-    } else if (validity && !this.selectedItem && !this._filteredItemsContainFilterOrInputValue()) {
-      // if no item is selected and filtered items don't contain filter or input value
-      // then this field is invalid
-      validity = false;
+    // don't update the validity if it has not been updated
+    if (this.dirty) {
+      if (!this.dirty && this.inputElement?.value === '' && this.required) {
+        // if there are no changes (not dirty) and input is empty and element is required, it's valid
+        validity = true;
+      } else if (!validity && this.inputElement?.value === '' && !this.required) {
+        // if input is empty and element is not required, it's valid
+        validity = true;
+      } else if (!validity && this._filteredItemsContainFilterOrInputValue()) {
+        // Invalid value was fixed to a valid one (filter string/filter input value exists in filteredItems)
+        validity = true;
+      } else if (validity && !this.selectedItem && !this._filteredItemsContainFilterOrInputValue()) {
+        // if no item is selected and filtered items don't contain filter or input value
+        // then this field is invalid
+        validity = false;
+      }
+      this._invalidInternal = !validity;
+      this._updateInvalidState();
+      this.dirty = false;
     }
-    this._invalidInternal = !validity;
-    this._updateInvalidState();
     return validity;
   }
 
