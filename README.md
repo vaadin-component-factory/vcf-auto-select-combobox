@@ -43,12 +43,6 @@ Add `<vcf-auto-select-combobox>` element to the page.
 
 1. Run `npm run serve` to open the demo.
 
-<!--
-## Vaadin Pro
-
-This component is available in the Vaadin Pro subscription. It is still open source, but you need to have a valid CVAL license in order to use it. Read more at: [Pricing](https://vaadin.com/pricing)
--->
-
 ## License
 
 Apache License 2.0
