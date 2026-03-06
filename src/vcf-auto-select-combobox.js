@@ -106,7 +106,7 @@ class AutoSelectComboBoxElement extends ComboBox {
       if (!this.dirty && this.inputElement?.value === '' && this.required) {
         // if there are no changes (not dirty) and input is empty and element is required, it's valid
         validity = true;
-      } else if (!validity && this.inputElement?.value === '' && !this.required) {
+      } else if (this.inputElement?.value === '' && !this.required) {
         // if input is empty and element is not required, it's valid
         validity = true;
       } else if (!validity && this._filteredItemsContainFilterOrInputValue()) {
