@@ -102,14 +102,21 @@ class AutoSelectComboBoxElement extends ComboBox {
 
   checkValidity() {
     let validity = super.checkValidity();
+
+    // Always reset invalid state when input is empty and field is not required,
+    // even if dirty flag is not set (fixes #5: validation error not cleared from empty field)
+    if (this.inputElement?.value === '' && !this.required) {
+      this._invalidInternal = false;
+      this._updateInvalidState();
+      this.dirty = false;
+      return true;
+    }
+
     // don't update the validity if it has not been updated
     if (this.dirty) {
-      if (!this.dirty && this.inputElement?.value === '' && this.required) {
-        // if there are no changes (not dirty) and input is empty and element is required, it's valid
-        validity = true;
-      } else if (this.inputElement?.value === '' && !this.required) {
-        // if input is empty and element is not required, it's valid
-        validity = true;
+      if (this.inputElement?.value === '' && this.required) {
+        // if input is empty and element is required, it's invalid
+        validity = false;
       } else if (!validity && this._filteredItemsContainFilterOrInputValue()) {
         // Invalid value was fixed to a valid one (filter string/filter input value exists in filteredItems)
         validity = true;
