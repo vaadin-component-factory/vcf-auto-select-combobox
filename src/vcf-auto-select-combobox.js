@@ -81,6 +81,12 @@ class AutoSelectComboBoxElement extends ComboBox {
   _filteredItemsChanged(filteredItems, oldFilteredItems) {
     super._filteredItemsChanged(filteredItems, oldFilteredItems);
     if (this.filteredItems && this.filteredItems.length === 1) {
+      // Skip if the single filtered item has no key = is a comboboxplaceholder (fixes #7:
+      // autofocus with prepopulated single value clears on blur)
+      // exclude the comboboxplaceholder
+      if (this.filteredItems[0].key === undefined) {
+        return;
+      }
       this._focusedIndex = 0;
     }
   }
